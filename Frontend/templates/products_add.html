@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Add New Product</h2>
+
+    <!-- Back Button -->
+    <div class="mb-3">
+        <a href="/inventory/Products/" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Product List
+        </a>
+    </div>
+
+    <!-- Product Form -->
+    <div class="p-4 bg-light shadow-sm rounded">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Display Form Fields -->
+            <div class="mb-3">
+                {{ product_form.product_name.label_tag }}
+                {{ product_form.product_name }}
+                {% if product_form.product_name.errors %}
+                    <small class="text-danger">{{ product_form.product_name.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ product_form.product_code.label_tag }}
+                {{ product_form.product_code }}
+                {% if product_form.product_code.errors %}
+                    <small class="text-danger">{{ product_form.product_code.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ product_form.price.label_tag }}
+                {{ product_form.price }}
+                {% if product_form.price.errors %}
+                    <small class="text-danger">{{ product_form.price.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ product_form.gst.label_tag }}
+                {{ product_form.gst }}
+                {% if product_form.gst.errors %}
+                    <small class="text-danger">{{ product_form.gst.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ product_form.food_product.label_tag }}
+                {{ product_form.food_product }}
+                {% if product_form.food_product.errors %}
+                    <small class="text-danger">{{ product_form.food_product.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ product_form.picture.label_tag }}
+                {{ product_form.picture }}
+                {% if product_form.picture.errors %}
+                    <small class="text-danger">{{ product_form.picture.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-plus-square"></i> Add Product
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

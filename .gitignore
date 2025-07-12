@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django specific
+db.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyd
+*.py~ 
+*.swp
+
+# Environment variables
+.env
+*.env
+
+# VS Code settings
+.vscode/
+
+# Virtual environment
+venv/
+.VENV/
+ENV/
+env/
+
+# macOS system files
+.DS_Store
+
+# Python packaging
+*.egg-info/
+build/
+dist/

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Document{% endblock %}</title>
+    
+    <!-- Load Bootstrap -->
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <!-- Link to Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/customers.css' %}">
+</head>
+<body>
+
+    <!-- Include Navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Dynamic Content Block -->
+    <div class="container">
+        {% block content %}
+        <!-- Content will be dynamically injected here -->
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <p class="text-muted text-center">Copyright &copy; 2024</p>
+        </div>
+    </footer>
+
+    <!-- Link to Custom JavaScript -->
+    <script src="{% static 'js/test.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Add New Customer</h2>
+
+    <!-- Back Button -->
+    <div class="mb-3">
+        <a href="/order/Customers/" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Customer List
+        </a>
+    </div>
+
+    <!-- Customer Form -->
+    <div class="p-4 bg-light shadow-sm rounded">
+        <form action="" method="POST">
+            {% csrf_token %}
+            
+            <!-- Display Form Fields -->
+            <div class="mb-3">
+                {{ customer_form.customer_name.label_tag }}
+                {{ customer_form.customer_name }}
+                {% if customer_form.customer_name.errors %}
+                    <small class="text-danger">{{ customer_form.customer_name.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ customer_form.customer_since.label_tag }}
+                {{ customer_form.customer_since }}
+                {% if customer_form.customer_since.errors %}
+                    <small class="text-danger">{{ customer_form.customer_since.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-person-check"></i> Add Customer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

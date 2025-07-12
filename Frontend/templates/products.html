@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Product Management</h2>
+
+    <!-- Add Product Button and Search Bar -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a href="/inventory/Product/add/" class="btn btn-primary">
+            <i class="bi bi-boxes"></i> Add Product
+        </a>
+        <input 
+            type="text" 
+            class="form-control w-25" 
+            id="searchProducts" 
+            placeholder="Search Products..." 
+            oninput="filterProducts()">
+    </div>
+
+    <!-- Products Table -->
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Product Name</th>
+                <th>Product Code</th>
+                <th>Price</th>
+                <th>GST (%)</th>
+                <th>Food Product</th>
+                <th>Picture</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="productTable">
+            {% for product in all_products %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ product.product_name }}</td>
+                <td>{{ product.product_code }}</td>
+                <td>₹{{ product.price }}</td>
+                <td>{{ product.gst }}</td>
+                <td>{{ product.food_product|yesno:"Yes,No" }}</td>
+                <td>
+                    {% if product.picture %}
+                        <img src="{{ product.picture.url }}" alt="Thumbnail" class="img-thumbnail" width="100">
+                    {% else %}
+                        <span class="text-muted">No Picture</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'product_update' product.id %}" class="btn btn-warning btn-sm">
+                        <i class="bi bi-pencil-square"></i> Update
+                    </a>
+                    <a href="{% url 'product_delete' product.id %}" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Informational Text -->
+    <p class="text-muted mt-4">
+        Manage your products efficiently. Add, update, or delete product records using the options provided above.
+    </p>
+</div>
+
+<script>
+    // JavaScript for filtering table rows
+    function filterProducts() {
+        const input = document.getElementById('searchProducts');
+        const filter = input.value.toLowerCase();
+        const rows = document.querySelectorAll('#productTable tr');
+        
+        rows.forEach(row => {
+            const name = row.cells[1].textContent.toLowerCase();
+            if (name.includes(filter)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+</script>
+{% endblock %}

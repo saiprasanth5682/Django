@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Order Management</h2>
+
+    <!-- Add Order Button and Search Bar -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a href="/order/add/orders/" class="btn btn-primary">
+            <i class="bi bi-cart-plus"></i> Add New Order
+        </a>
+        <input 
+            type="text" 
+            class="form-control w-25" 
+            id="searchOrders" 
+            placeholder="Search Orders..." 
+            oninput="filterOrders()">
+    </div>
+
+    <!-- Orders Table -->
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Order Number</th>
+                <th>Date</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>GST Amount</th>
+                <th>Bill Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="orderTable">
+            {% for order in all_orders %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ order.customer_reference }}</td>
+                <td>{{ order.product_reference }}</td>
+                <td>{{ order.order_number }}</td>
+                <td>{{ order.order_date }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>₹{{ order.amount }}</td>
+                <td>₹{{ order.gst_amount }}</td>
+                <td>₹{{ order.bill_amount }}</td>
+                <td>
+                    <a href="{% url 'order_update' order.id %}" class="btn btn-warning btn-sm">
+                        <i class="bi bi-pencil-square"></i> Update
+                    </a>
+                    <a href="{% url 'order_delete' order.id %}" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Informational Text -->
+    <p class="text-muted mt-4">
+        Manage your orders effectively. Add, update, or delete order records using the options provided above.
+    </p>
+</div>
+
+<script>
+    // JavaScript for filtering table rows
+    function filterOrders() {
+        const input = document.getElementById('searchOrders');
+        const filter = input.value.toLowerCase();
+        const rows = document.querySelectorAll('#orderTable tr');
+        
+        rows.forEach(row => {
+            const orderDetails = Array.from(row.cells).map(cell => cell.textContent.toLowerCase());
+            const match = orderDetails.some(detail => detail.includes(filter));
+            row.style.display = match ? '' : 'none';
+        });
+    }
+</script>
+{% endblock %}

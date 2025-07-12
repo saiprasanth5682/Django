@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center"> Signup Page</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <form action="" method="POST">
+
+                    {% csrf_token %}
+                    
+                    <div class="form-group mb-3">
+                        <label for="username" class = 'form-label'>Username</label>
+                        <input type="text" class="form-control" name ="username" required>
+                    </div>
+                    <p> {{error}} </p>
+                    <div class="form-group mb-3">
+                        <label for="password" class = 'form-label'>Password</label>
+                        <input type="password" class="form-control" name ="password" id="exampleInputpassword" required>
+                    </div>
+
+                     <div class="form-group mb-3">
+                        <label for="Firstname" class = 'form-label'>Firstname</label>
+                        <input type="text" class="form-control" name ="Firstname" required>
+                    </div>
+                     <div class="form-group mb-3">
+                        <label for="Lastname" class = 'form-label'>Lastname</label>
+                        <input type="text" class="form-control" name ="Lastname" required>
+                    </div>
+                     <div class="form-group mb-3">
+                        <label for="exampleInputEmail1" class = 'form-label'>Email Address</label>
+                        <input type="email" class="form-control" name ="email_address" required>
+                    </div>
+
+                     <div class="form-group mb-3">
+                        <label for="Age" class = 'form-label'>Age</label>
+                        <input type="number" class="form-control" name ="AGE" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

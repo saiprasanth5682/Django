@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Add New Order</h2>
+
+    <!-- Back Button -->
+    <div class="mb-3">
+        <a href="/order/orders/" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Orders List
+        </a>
+    </div>
+
+    <!-- Order Form -->
+    <div class="p-4 bg-light shadow-sm rounded">
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            <!-- Display Form Fields -->
+            <div class="mb-3">
+                {{ order_form.customer_reference.label_tag }}
+                {{ order_form.customer_reference }}
+                {% if order_form.customer_reference.errors %}
+                    <small class="text-danger">{{ order_form.customer_reference.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ order_form.product_reference.label_tag }}
+                {{ order_form.product_reference }}
+                {% if order_form.product_reference.errors %}
+                    <small class="text-danger">{{ order_form.product_reference.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ order_form.order_number.label_tag }}
+                {{ order_form.order_number }}
+                {% if order_form.order_number.errors %}
+                    <small class="text-danger">{{ order_form.order_number.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ order_form.order_date.label_tag }}
+                {{ order_form.order_date }}
+                {% if order_form.order_date.errors %}
+                    <small class="text-danger">{{ order_form.order_date.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ order_form.quantity.label_tag }}
+                {{ order_form.quantity }}
+                {% if order_form.quantity.errors %}
+                    <small class="text-danger">{{ order_form.quantity.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ order_form.amount.label_tag }}
+                {{ order_form.amount }}
+                {% if order_form.amount.errors %}
+                    <small class="text-danger">{{ order_form.amount.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ order_form.gst_amount.label_tag }}
+                {{ order_form.gst_amount }}
+                {% if order_form.gst_amount.errors %}
+                    <small class="text-danger">{{ order_form.gst_amount.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ order_form.bill_amount.label_tag }}
+                {{ order_form.bill_amount }}
+                {% if order_form.bill_amount.errors %}
+                    <small class="text-danger">{{ order_form.bill_amount.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle"></i> Add Order
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
